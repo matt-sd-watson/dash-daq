@@ -40,6 +40,8 @@ class ColorPicker extends Component {
       value: props.value
     };
 
+    this.disableAlpha = props.disableAlpha;
+
     this.calcHandleGlow = this.calcHandleGlow.bind(this);
     this.setValue = this.setValue.bind(this);
   }
@@ -65,7 +67,7 @@ class ColorPicker extends Component {
   }
 
   render() {
-    const { id, className, style, theme } = this.props;
+    const { id, className, style, theme, disableAlpha } = this.props;
 
     const elementName = getClassName('colorpicker', theme);
 
@@ -83,6 +85,7 @@ class ColorPicker extends Component {
               className={elementName + '__chromepicker'}
               color={parseValue(this.state.value)}
               onChangeComplete={this.setValue}
+              disableAlpha={disableAlpha}
             />
           </Container>
         </LabelContainer>

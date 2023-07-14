@@ -149,6 +149,7 @@ class Demo extends Component {
             value={this.state.color}
             setProps={this.updateColor}
             label="Color Picker"
+            disableAlpha={true}
           />
           <ToggleSwitch
             disabled={true}

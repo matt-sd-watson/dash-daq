@@ -50,20 +50,19 @@ Keyword arguments:
 - width (number; optional):
     Width of the component. Set both width and height for a
     rectangular indicator."""
+    _children_props = []
+    _base_nodes = ['children']
+    _namespace = 'dash_daq'
+    _type = 'Indicator'
     @_explicitize_args
     def __init__(self, id=Component.UNDEFINED, value=Component.UNDEFINED, color=Component.UNDEFINED, size=Component.UNDEFINED, width=Component.UNDEFINED, height=Component.UNDEFINED, theme=Component.UNDEFINED, label=Component.UNDEFINED, labelPosition=Component.UNDEFINED, className=Component.UNDEFINED, style=Component.UNDEFINED, **kwargs):
         self._prop_names = ['id', 'className', 'color', 'height', 'label', 'labelPosition', 'size', 'style', 'theme', 'value', 'width']
-        self._type = 'Indicator'
-        self._namespace = 'dash_daq'
         self._valid_wildcard_attributes =            []
         self.available_properties = ['id', 'className', 'color', 'height', 'label', 'labelPosition', 'size', 'style', 'theme', 'value', 'width']
         self.available_wildcard_properties =            []
         _explicit_args = kwargs.pop('_explicit_args')
         _locals = locals()
-        _locals.update(kwargs)  # For wildcard attrs
-        args = {k: _locals[k] for k in _explicit_args if k != 'children'}
-        for k in []:
-            if k not in args:
-                raise TypeError(
-                    'Required argument `' + k + '` was not specified.')
+        _locals.update(kwargs)  # For wildcard attrs and excess named props
+        args = {k: _locals[k] for k in _explicit_args}
+
         super(Indicator, self).__init__(**args)

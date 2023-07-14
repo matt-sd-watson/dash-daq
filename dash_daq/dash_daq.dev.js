@@ -230,7 +230,7 @@ window["dash_daq"] =
 /******/ 	        var srcFragments = src.split('/');
 /******/ 	        var fileFragments = srcFragments.slice(-1)[0].split('.');
 /******/
-/******/ 	        fileFragments.splice(1, 0, "v0_5_1m1634418925");
+/******/ 	        fileFragments.splice(1, 0, "v0_5_1m1689019973");
 /******/ 	        srcFragments.splice(-1, 1, fileFragments.join('.'))
 /******/
 /******/ 	        return srcFragments.join('/');
@@ -37882,7 +37882,7 @@ BooleanSwitch.defaultProps = {
 };
 BooleanSwitch.propTypes = {
   /**
-   * The ID used to identify this compnent in Dash callbacks
+   * The ID used to identify this component in Dash callbacks
    */
   id: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.string,
 
@@ -38060,7 +38060,8 @@ ColorPicker.defaultProps = {
   theme: _styled_constants__WEBPACK_IMPORTED_MODULE_2__["light"],
   labelPosition: 'top',
   persisted_props: ['value'],
-  persistence_type: 'local'
+  persistence_type: 'local',
+  disableAlpha: true
 };
 ColorPicker.propTypes = {
   /**
@@ -38140,6 +38141,11 @@ ColorPicker.propTypes = {
    * Style to apply to the root component element
    */
   style: prop_types__WEBPACK_IMPORTED_MODULE_0___default.a.object,
+
+  /**
+  * Whether or not the alpha transparency slider should be visible.
+  */
+  disableAlpha: prop_types__WEBPACK_IMPORTED_MODULE_0___default.a.bool,
 
   /**
    * Used to allow user interactions in this component to be persisted when
@@ -39304,12 +39310,18 @@ function (_Component) {
     _this.onMouseUp = _this.onMouseUp.bind(_assertThisInitialized(_this));
     _this.onMouseMove = _this.onMouseMove.bind(_assertThisInitialized(_this));
     _this.setValue = _this.setValue.bind(_assertThisInitialized(_this));
+    _this.getValue = _this.getValue.bind(_assertThisInitialized(_this));
     return _this;
   }
 
   _createClass(Knob, [{
     key: "noop",
     value: function noop() {}
+  }, {
+    key: "getValue",
+    value: function getValue(value) {
+      return value > this.props.min && value < this.props.max ? value : this.props.min > value ? this.props.min : this.props.max;
+    }
   }, {
     key: "UNSAFE_componentWillReceiveProps",
     value: function UNSAFE_componentWillReceiveProps(newProps) {
@@ -39443,7 +39455,7 @@ function (_Component) {
       var progress = Object(_helpers_util__WEBPACK_IMPORTED_MODULE_8__["computeProgress"])({
         min: min,
         max: max,
-        value: value > min && value < max ? value : (min + max) / 2,
+        value: this.getValue(value),
         progressionTarget: 1
       });
       var colorValue = textColor || Object(_helpers_colorRanges__WEBPACK_IMPORTED_MODULE_9__["getColorValue"])(color);
@@ -39473,12 +39485,12 @@ function (_Component) {
       }, filteredProps, this.state, {
         min: this.props.min != this.state.min ? this.props.min : this.state.min,
         max: this.props.max != this.state.max ? this.props.max : this.state.max,
-        value: value > min && value < max ? value : (min + max) / 2,
+        value: this.getValue(value),
         scale: Object(_helpers_scale__WEBPACK_IMPORTED_MODULE_10__["default"])(this.props),
         currentDeg: valueToDeg({
           min: this.props.min,
           max: this.props.max,
-          value: value > min && value < max ? value : (min + max) / 2
+          value: this.getValue(value)
         }),
         refFunc: function refFunc(ele) {
           return _this2.knobElement = ele;
@@ -39680,7 +39692,7 @@ Knob.propTypes = {
   persistence_type: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.oneOf(['local', 'session', 'memory']),
 
   /**
-     * show current value of knob
+    * show current value of knob
    */
   showCurrentValue: prop_types__WEBPACK_IMPORTED_MODULE_1___default.a.bool,
 
@@ -41344,9 +41356,9 @@ var Tank = function Tank(props) {
   }));
   var elementName = Object(_helpers_classNameGenerator__WEBPACK_IMPORTED_MODULE_9__["getClassName"])('tank', theme);
   var currentValueStyle = props.currentValueStyle || (theme.dark ? {
-    'color': 'white'
+    color: 'white'
   } : {
-    'color': 'black'
+    color: 'black'
   });
 
   var renderTicks = function renderTicks() {

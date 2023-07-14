@@ -24,7 +24,8 @@ ColorPicker.defaultProps = {
   theme: light,
   labelPosition: 'top',
   persisted_props: ['value'],
-  persistence_type: 'local'
+  persistence_type: 'local',
+  disableAlpha: true
 };
 
 ColorPicker.propTypes = {
@@ -107,6 +108,11 @@ ColorPicker.propTypes = {
    * Style to apply to the root component element
    */
   style: PropTypes.object,
+
+  /**
+   * Whether or not the alpha transparency slider should be visible.
+   */
+  disableAlpha: PropTypes.bool,
 
   /**
    * Used to allow user interactions in this component to be persisted when
