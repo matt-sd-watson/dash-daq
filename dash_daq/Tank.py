@@ -109,20 +109,19 @@ Keyword arguments:
 
 - width (number; default 112):
     The width of the tank in pixels."""
+    _children_props = []
+    _base_nodes = ['children']
+    _namespace = 'dash_daq'
+    _type = 'Tank'
     @_explicitize_args
     def __init__(self, id=Component.UNDEFINED, value=Component.UNDEFINED, height=Component.UNDEFINED, width=Component.UNDEFINED, color=Component.UNDEFINED, theme=Component.UNDEFINED, currentValueStyle=Component.UNDEFINED, min=Component.UNDEFINED, max=Component.UNDEFINED, base=Component.UNDEFINED, logarithmic=Component.UNDEFINED, showCurrentValue=Component.UNDEFINED, units=Component.UNDEFINED, label=Component.UNDEFINED, labelPosition=Component.UNDEFINED, scale=Component.UNDEFINED, className=Component.UNDEFINED, style=Component.UNDEFINED, exceedMessage=Component.UNDEFINED, lagingMessage=Component.UNDEFINED, textColor=Component.UNDEFINED, **kwargs):
         self._prop_names = ['id', 'base', 'className', 'color', 'currentValueStyle', 'exceedMessage', 'height', 'label', 'labelPosition', 'lagingMessage', 'logarithmic', 'max', 'min', 'scale', 'showCurrentValue', 'style', 'textColor', 'theme', 'units', 'value', 'width']
-        self._type = 'Tank'
-        self._namespace = 'dash_daq'
         self._valid_wildcard_attributes =            []
         self.available_properties = ['id', 'base', 'className', 'color', 'currentValueStyle', 'exceedMessage', 'height', 'label', 'labelPosition', 'lagingMessage', 'logarithmic', 'max', 'min', 'scale', 'showCurrentValue', 'style', 'textColor', 'theme', 'units', 'value', 'width']
         self.available_wildcard_properties =            []
         _explicit_args = kwargs.pop('_explicit_args')
         _locals = locals()
-        _locals.update(kwargs)  # For wildcard attrs
-        args = {k: _locals[k] for k in _explicit_args if k != 'children'}
-        for k in []:
-            if k not in args:
-                raise TypeError(
-                    'Required argument `' + k + '` was not specified.')
+        _locals.update(kwargs)  # For wildcard attrs and excess named props
+        args = {k: _locals[k] for k in _explicit_args}
+
         super(Tank, self).__init__(**args)

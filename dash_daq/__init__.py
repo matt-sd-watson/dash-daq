@@ -13,7 +13,6 @@ from ._imports_ import *  # noqa: F401, F403, E402
 from ._imports_ import __all__  # noqa: E402
 
 async_resources = [
-    'colorpicker',
     'slider'
 ]
 

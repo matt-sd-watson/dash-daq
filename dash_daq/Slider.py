@@ -159,20 +159,19 @@ Keyword arguments:
 
 - vertical (boolean; optional):
     If True, the slider will be vertical."""
+    _children_props = []
+    _base_nodes = ['children']
+    _namespace = 'dash_daq'
+    _type = 'Slider'
     @_explicitize_args
     def __init__(self, id=Component.UNDEFINED, style=Component.UNDEFINED, marks=Component.UNDEFINED, color=Component.UNDEFINED, value=Component.UNDEFINED, className=Component.UNDEFINED, labelPosition=Component.UNDEFINED, disabled=Component.UNDEFINED, dots=Component.UNDEFINED, included=Component.UNDEFINED, min=Component.UNDEFINED, max=Component.UNDEFINED, step=Component.UNDEFINED, vertical=Component.UNDEFINED, size=Component.UNDEFINED, targets=Component.UNDEFINED, theme=Component.UNDEFINED, handleLabel=Component.UNDEFINED, updatemode=Component.UNDEFINED, persistence=Component.UNDEFINED, persisted_props=Component.UNDEFINED, persistence_type=Component.UNDEFINED, fullSize=Component.UNDEFINED, **kwargs):
         self._prop_names = ['id', 'className', 'color', 'disabled', 'dots', 'fullSize', 'handleLabel', 'included', 'labelPosition', 'marks', 'max', 'min', 'persisted_props', 'persistence', 'persistence_type', 'size', 'step', 'style', 'targets', 'theme', 'updatemode', 'value', 'vertical']
-        self._type = 'Slider'
-        self._namespace = 'dash_daq'
         self._valid_wildcard_attributes =            []
         self.available_properties = ['id', 'className', 'color', 'disabled', 'dots', 'fullSize', 'handleLabel', 'included', 'labelPosition', 'marks', 'max', 'min', 'persisted_props', 'persistence', 'persistence_type', 'size', 'step', 'style', 'targets', 'theme', 'updatemode', 'value', 'vertical']
         self.available_wildcard_properties =            []
         _explicit_args = kwargs.pop('_explicit_args')
         _locals = locals()
-        _locals.update(kwargs)  # For wildcard attrs
-        args = {k: _locals[k] for k in _explicit_args if k != 'children'}
-        for k in []:
-            if k not in args:
-                raise TypeError(
-                    'Required argument `' + k + '` was not specified.')
+        _locals.update(kwargs)  # For wildcard attrs and excess named props
+        args = {k: _locals[k] for k in _explicit_args}
+
         super(Slider, self).__init__(**args)
